@@ -7,3 +7,4 @@
     </div>&nbsp;
     <button type="submit" class="btn btn-primary btn-lg ms-2">Add</button>
 </form>
+<hr>

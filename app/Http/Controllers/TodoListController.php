@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreRequest;
 use App\Services\TodoListService;
+use App\Http\Requests\StoreRequest;
+use App\Http\Requests\DeleteSelectRequest;
 
 class TodoListController extends Controller
 {
@@ -50,11 +51,23 @@ class TodoListController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $this->service->deleteTodo($id);
+        return redirect()
+            ->route('index');
+    }
+
+    /**
+     * 批次刪除選中
+     *
+     * @return void
+     */
+    public function deleteSelect(DeleteSelectRequest $request)
+    {
+        $inputIds = $request->id;
+        $this->service->deleteSelected($inputIds);
         return redirect()
             ->route('index');
     }

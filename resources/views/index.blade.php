@@ -26,7 +26,6 @@
                             @include('errorMessage')
                             {{-- 建立表單 --}}
                             @include('create')
-                            <hr>
                             {{-- 資料列表 --}}
                             @include('lists')
                         </div>

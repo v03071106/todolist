@@ -44,4 +44,16 @@ class TodoListService
     {
         return $this->repository->delete($id);
     }
+
+    /**
+     * 批次刪除選中項目
+     *
+     * @param array $ids
+     */
+    public function deleteSelected(array $ids)
+    {
+        foreach ($ids as $key => $id) {
+            $this->repository->delete($id);
+        }
+    }
 }
