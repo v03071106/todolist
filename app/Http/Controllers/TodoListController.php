@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreRequest;
+use App\Services\TodoListService;
 
 class TodoListController extends Controller
 {
+    private $service;
+
+    public function __construct(TodoListService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,62 +21,29 @@ class TodoListController extends Controller
      */
     public function index()
     {
-        return view('index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $lists = $this->service->getLists();
+        return view('index', compact('lists'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
-    }
+        $input = $request->only(['content']);
+        $result = $this->service->createTodo($input);
+        if (false === $result) {
+            return redirect()
+                ->back()
+                ->withErrors(['帳號不存在或密碼錯誤.']);
+        } else {
+            return redirect()
+                ->route('index');
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
@@ -79,6 +54,8 @@ class TodoListController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->service->deleteTodo($id);
+        return redirect()
+            ->route('index');
     }
 }
