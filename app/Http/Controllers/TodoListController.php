@@ -29,22 +29,15 @@ class TodoListController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreRequest  $request
+     * @param \App\Http\Requests\StoreRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
     {
         $input = $request->only(['content']);
-        $result = $this->service->createTodo($input);
-        if (false === $result) {
-            return redirect()
-                ->back()
-                ->withErrors(['帳號不存在或密碼錯誤.']);
-        } else {
-            return redirect()
-                ->route('index');
-        }
-
+        $this->service->createTodo($input);
+        return redirect()
+            ->route('index');
     }
 
     /**
@@ -62,7 +55,7 @@ class TodoListController extends Controller
     /**
      * 批次刪除選中
      *
-     * @return void
+     * @param \App\Http\Requests\DeleteSelectRequest $request
      */
     public function deleteSelect(DeleteSelectRequest $request)
     {
