@@ -9,6 +9,21 @@ use Tests\TestCase;
 class IndexTest extends TestCase
 {
     /**
+     * 測試 views/index.blade.php 是否正常
+     *
+     * @return void
+     */
+    public function test_a_index_view_can_be_rendered()
+    {
+        $view = $this->view('index', [
+            'errors' => [],
+            'lists' => []
+        ]);
+
+        $view->assertSeeText('Awesome Todo List');
+    }
+
+    /**
      * 訪問 index 是否取得200
      *
      * @return void

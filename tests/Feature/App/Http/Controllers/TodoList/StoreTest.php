@@ -10,6 +10,20 @@ use Tests\TestCase;
 class StoreTest extends TestCase
 {
     /**
+     * 測試沒有輸入任何資料時，出現的驗證文字
+     *
+     * @return void
+     */
+    public function test_a_index_view_required_validate_message()
+    {
+        $view = $this->withViewErrors([
+                'required' => 'The content field is required.'
+            ])->view('errorMessage');
+
+        $view->assertSee('The content field is required.');
+    }
+
+    /**
      * 測試 Request post 送出的資料是否符合
      *
      * @return void
