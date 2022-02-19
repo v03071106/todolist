@@ -15,7 +15,7 @@ class DeleteSelectTest extends TestCase
      */
     public function test_status_is_500()
     {
-        $response = $this->post(route('deleteSelect'), [
+        $response = $this->delete(route('deleteSelect'), [
             'id' => [
                 99999, 88888
             ]

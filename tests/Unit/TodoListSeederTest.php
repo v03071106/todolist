@@ -1,10 +1,9 @@
 <?php
 
-namespace Tests\Feature\database\seeders;
+namespace Tests\Unit;
 
 use Tests\TestCase;
 use Database\Seeders\TodoListSeeder;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TodoListSeederTest extends TestCase

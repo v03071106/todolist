@@ -17,4 +17,4 @@ use App\Http\Controllers\TodoListController;
 Route::get('/', [TodoListController::class, 'index'])->name('index');
 Route::post('/', [TodoListController::class, 'store'])->name('store');
 Route::get('/delete/{id}', [TodoListController::class, 'destroy'])->name('delete');
-Route::post('/deleteSelect', [TodoListController::class, 'deleteSelect'])->name('deleteSelect');
+Route::delete('/deleteSelect', [TodoListController::class, 'deleteSelect'])->name('deleteSelect');

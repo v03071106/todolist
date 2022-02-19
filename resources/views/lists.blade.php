@@ -1,6 +1,7 @@
 {{-- 處理表單 --}}
 <form method="post" action="{{ route('deleteSelect') }}">
     {{ csrf_field() }}
+    {{ method_field('DELETE') }}
     <ul class="list-group mb-0">
         @foreach ($lists as $item)
         <li class="list-group-item d-flex justify-content-between align-items-center border-0 rounded-0 mb-2">
